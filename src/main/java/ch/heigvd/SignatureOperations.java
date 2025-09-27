@@ -3,6 +3,9 @@ package ch.heigvd;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
+/**
+ * This class provides methods for signing data and verifying signatures.
+ */
 public class SignatureOperations {
     /**
      * Signs the given data with the provided private key.

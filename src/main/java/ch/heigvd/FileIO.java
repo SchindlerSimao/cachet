@@ -5,6 +5,9 @@ import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 
+/**
+ * Utility class for file input/output operations and key loading.
+ */
 public class FileIO {
     /**
      * Reads the content of a file and returns it as a String.
