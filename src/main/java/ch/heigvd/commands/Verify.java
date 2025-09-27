@@ -2,19 +2,17 @@ package ch.heigvd.commands;
 
 import picocli.CommandLine;
 
-import java.io.File;
-
 @CommandLine.Command(name = "verify", description = "Vérifie la signature d'un fichier")
 class Verify implements Runnable {
 
     @CommandLine.Parameters(index = "0", description = "Fichier d'entrée à vérifier")
-    private File inputFile;
+    private String inputFile;
 
     @CommandLine.Parameters(index = "1", description = "Fichier contenant la signature")
-    private File signatureFile;
+    private String signatureFile;
 
     @CommandLine.Parameters(index = "2", description = "Clé publique pour la vérification")
-    private File publicKey;
+    private String publicKey;
 
     @Override
     public void run() {
