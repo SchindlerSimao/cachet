@@ -1,7 +1,7 @@
 package ch.heigvd.commands;
 
-import ch.heigvd.FileIO;
-import ch.heigvd.SignatureOperations;
+import ch.heigvd.utils.FileIOUtils;
+import ch.heigvd.utils.SignatureUtils;
 import picocli.CommandLine;
 
 import java.security.PublicKey;
@@ -20,14 +20,14 @@ class Verify implements Runnable {
 
     @Override
     public void run() {
-        final byte[] dataToVerify = FileIO.fileToBytes(inputFile);
-        final PublicKey publicKey = FileIO.loadPublicKey(this.publicKey);
-        final byte[] signature = FileIO.fileToBytes(signatureFile);
+        final byte[] dataToVerify = FileIOUtils.fileToBytes(inputFile);
+        final PublicKey publicKey = FileIOUtils.loadPublicKey(this.publicKey);
+        final byte[] signature = FileIOUtils.fileToBytes(signatureFile);
 
         System.out.printf("Vérification de %s avec signature %s et clé %s%n",
                 inputFile, signatureFile, publicKey);
 
-        final boolean valid = SignatureOperations.verify(dataToVerify, signature, publicKey);
+        final boolean valid = SignatureUtils.verify(dataToVerify, signature, publicKey);
 
         System.out.printf("La signature est %s%n", valid ? "valide" : "invalide");
     }

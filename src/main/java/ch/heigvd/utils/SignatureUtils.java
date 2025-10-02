@@ -1,11 +1,13 @@
-package ch.heigvd;
+package ch.heigvd.utils;
+
+import ch.heigvd.SignatureConstants;
 
 import java.security.*;
 
 /**
  * This class provides methods for signing data and verifying signatures.
  */
-public class SignatureOperations {
+public class SignatureUtils {
     /**
      * Signs the given data with the provided private key.
      * @param data data to sign

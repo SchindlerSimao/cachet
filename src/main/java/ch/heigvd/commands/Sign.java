@@ -1,7 +1,7 @@
 package ch.heigvd.commands;
 
-import ch.heigvd.FileIO;
-import ch.heigvd.SignatureOperations;
+import ch.heigvd.utils.FileIOUtils;
+import ch.heigvd.utils.SignatureUtils;
 import picocli.CommandLine;
 
 import java.security.PrivateKey;
@@ -21,17 +21,17 @@ class Sign implements Runnable {
 
     @Override
     public void run() { // TODO: ? add an option to generate a key pair if none is provided ?
-        final byte[] dataToSign = FileIO.fileToBytes(inputFilePath);
-        final PrivateKey privateKey = FileIO.loadPrivateKey(privateKeyPath);
+        final byte[] dataToSign = FileIOUtils.fileToBytes(inputFilePath);
+        final PrivateKey privateKey = FileIOUtils.loadPrivateKey(privateKeyPath);
 
         System.out.printf("Signature de %s vers %s%n", inputFilePath, outputSignaturePath);
 
-        final byte[] signature = SignatureOperations.sign(dataToSign, privateKey);
+        final byte[] signature = SignatureUtils.sign(dataToSign, privateKey);
 
         final byte[] encodedSignature = Base64.getEncoder().encode(signature);
 
         System.out.println("Signature :" + new String(encodedSignature));
-        FileIO.writeToFile(encodedSignature, outputSignaturePath);
+        FileIOUtils.writeToFile(encodedSignature, outputSignaturePath);
 
         System.out.println("Terminé.");
     }

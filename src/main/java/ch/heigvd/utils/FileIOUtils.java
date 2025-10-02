@@ -1,4 +1,4 @@
-package ch.heigvd;
+package ch.heigvd.utils;
 
 import java.io.*;
 import java.security.*;
@@ -10,7 +10,7 @@ import java.util.Base64;
 /**
  * Utility class for file input/output operations and key loading.
  */
-public class FileIO {
+public class FileIOUtils {
     /**
      * Reads the content of a file and returns it as a String.
      * 

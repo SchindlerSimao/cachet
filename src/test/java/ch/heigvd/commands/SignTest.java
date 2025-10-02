@@ -1,7 +1,7 @@
 package ch.heigvd.commands;
 
 import ch.heigvd.SignatureConstants;
-import ch.heigvd.SignatureOperations;
+import ch.heigvd.utils.SignatureUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,7 +27,7 @@ public class SignTest {
 
     @Test
     public void testSignatureIsValid() throws Exception {
-        final byte[] signature = SignatureOperations.sign(message, privateKey);
+        final byte[] signature = SignatureUtils.sign(message, privateKey);
 
         final Signature verifier = Signature.getInstance(SignatureConstants.SIGNATURE_ALGORITHM);
         verifier.initVerify(publicKey);
@@ -37,7 +37,7 @@ public class SignTest {
 
     @Test
     public void testSignatureIsNotNullOrEmpty() {
-        final byte[] signature = SignatureOperations.sign(message, privateKey);
+        final byte[] signature = SignatureUtils.sign(message, privateKey);
 
         assertNotNull(signature);
         assertTrue(signature.length > 0);
