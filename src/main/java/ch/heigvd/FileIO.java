@@ -4,6 +4,7 @@ import java.io.*;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
 /**
@@ -78,15 +79,17 @@ public class FileIO {
     private static Key loadKey(final String filepath, final boolean publicKey) {
         final String key = removePemHeaders(fileToString(filepath));
         final byte[] decodedKey = Base64.getDecoder().decode(key);
-
-        final PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(decodedKey);
         try {
             final KeyFactory kf = KeyFactory.getInstance("ed25519");
-            if (publicKey)
+            if (publicKey) {
+                final X509EncodedKeySpec spec = new X509EncodedKeySpec(decodedKey);
                 return kf.generatePublic(spec);
-            return kf.generatePrivate(spec);
+            } else {
+                final PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(decodedKey);
+                return kf.generatePrivate(spec);
+            }
         } catch (final NoSuchAlgorithmException | InvalidKeySpecException e) {
-            System.err.println("Error loading private key: " + filepath + " - " + e.getMessage());
+            System.err.println("Error loading key: " + filepath + " - " + e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -125,6 +128,8 @@ public class FileIO {
         return pemContent
                 .replace("-----BEGIN PRIVATE KEY-----", "")
                 .replace("-----END PRIVATE KEY-----", "")
+                .replace("-----BEGIN PUBLIC KEY-----", "")
+                .replace("-----END PUBLIC KEY-----", "")
                 .replaceAll("\\s", "");
     }
 }

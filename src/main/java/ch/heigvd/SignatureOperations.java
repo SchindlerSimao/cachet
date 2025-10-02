@@ -35,10 +35,18 @@ public class SignatureOperations {
      * Verifies the given signature against the data using the provided public key.
      * @param data data to verify
      * @param signature signature to verify
-     * @param publicKeyPath public key to use for verification
+     * @param publicKey public key to use for verification
      * @return true if the signature is valid, false otherwise
      */
-    public static boolean verify(final byte[] data, final byte[] signature, final PublicKey publicKeyPath) {
-        return true;
+    public static boolean verify(final byte[] data, final byte[] signature, final PublicKey publicKey) {
+        try {
+            final Signature verifier = Signature.getInstance(SignatureConstants.SIGNATURE_ALGORITHM);
+            verifier.initVerify(publicKey);
+            verifier.update(data);
+
+            return verifier.verify(signature);
+        } catch (NoSuchAlgorithmException | InvalidKeyException | SignatureException e) {
+            throw new RuntimeException(e); // TODO: qqch de plus propre
+        }
     }
 }
