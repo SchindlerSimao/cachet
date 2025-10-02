@@ -21,12 +21,10 @@
             <artifactId>picocli</artifactId>
             <version>4.7.7</version>
         </dependency>
-
-        <!-- BouncyCastle Cryptography Provider for Ed25519 signatures -->
         <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk18on</artifactId>
-            <version>1.78.1</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.19.0</version>
         </dependency>
     </dependencies>
 
