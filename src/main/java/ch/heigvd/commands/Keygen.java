@@ -21,14 +21,6 @@ class Keygen implements Runnable {
     @CommandLine.Option(names = { "-o", "--out" }, description = "Fichier de sortie pour la clé privée")
     private File outputFile;
 
-    private String bytesToHex(byte[] input) {
-        StringBuilder builder = new StringBuilder();
-        for (byte b : input) {
-            builder.append(String.format("%02x", b));
-        }
-        return builder.toString();
-    }
-
     private static byte[] PEM_PRIVATE_HEADER = "-----BEGIN PRIVATE KEY-----\n".getBytes();
     private static byte[] PEM_PRIVATE_FOOTER = "\n-----END PRIVATE KEY-----".getBytes();
 
