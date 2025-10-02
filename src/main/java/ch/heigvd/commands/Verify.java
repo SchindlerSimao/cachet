@@ -2,6 +2,7 @@ package ch.heigvd.commands;
 
 import ch.heigvd.FileIO;
 import ch.heigvd.SignatureOperations;
+import org.apache.commons.lang3.StringUtils;
 import picocli.CommandLine;
 
 import java.security.PublicKey;

@@ -80,8 +80,8 @@ public class FileIO {
                 return kf.generatePublic(spec);
             return kf.generatePrivate(spec);
         } catch (final NoSuchAlgorithmException | InvalidKeySpecException e){
-            System.err.println("Error loading private key: " + filepath);
-            return null;
+            System.err.println("Error loading private key: " + filepath + " - " + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
@@ -91,8 +91,17 @@ public class FileIO {
      * @param filePath the path to the file
      */
     public static void writeToFile(final String content, final String filePath){
+        writeToFile(content.getBytes(), filePath);
+    }
+
+    /**
+     * Writes the given content to a file at the specified path.
+     * @param content the content to write to the file
+     * @param filePath the path to the file
+     */
+    public static void writeToFile(final byte[] content, final String filePath){
         try(final OutputStream outputStream = new FileOutputStream(filePath)){
-            outputStream.write(content.getBytes());
+            outputStream.write(content);
         } catch (IOException e) {
             System.err.println("Error writing to file: " + filePath);
 

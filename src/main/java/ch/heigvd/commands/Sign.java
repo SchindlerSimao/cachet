@@ -19,13 +19,14 @@ class Sign implements Runnable {
     private String privateKeyPath;
 
     @Override
-    public void run() {
+    public void run() { // TODO: ? add an option to generate a key pair if none is provided ?
         final byte[] dataToSign = FileIO.fileToBytes(inputFilePath);
         final PrivateKey privateKey = FileIO.loadPrivateKey(privateKeyPath);
 
         System.out.printf("Signature de %s vers %s%n", inputFilePath, outputSignaturePath);
 
-        FileIO.writeToFile(SignatureOperations.sign(dataToSign, privateKey), outputSignaturePath);
+        final byte[] signature = SignatureOperations.sign(dataToSign, privateKey);
+        FileIO.writeToFile(signature, outputSignaturePath);
 
         System.out.println("Terminé.");
     }

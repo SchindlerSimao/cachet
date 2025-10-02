@@ -1,7 +1,6 @@
 package ch.heigvd;
 
-import java.security.PrivateKey;
-import java.security.PublicKey;
+import java.security.*;
 
 /**
  * This class provides methods for signing data and verifying signatures.
@@ -13,8 +12,23 @@ public class SignatureOperations {
      * @param privateKey private key to use for signing
      * @return the signature as a byte array
      */
-    public static String sign(final byte[] data, final PrivateKey privateKey) {
-        return "signature";
+    public static byte[] sign(final byte[] data, final PrivateKey privateKey) {
+        try{
+            final Signature ecdsaSign = Signature.getInstance("SHA256withECDSA");
+            ecdsaSign.initSign(privateKey);
+            ecdsaSign.update(data);
+
+            return ecdsaSign.sign();
+        } catch (final SignatureException exception){
+            System.err.printf("Erreur de signature %s%n", exception.getMessage());
+            throw new RuntimeException(exception); // TODO : custom exception
+        } catch (InvalidKeyException e) {
+            System.err.println("Clé invalide");
+            throw new RuntimeException(e);
+        } catch (NoSuchAlgorithmException e) {
+            System.err.println("Algorithme non supporté");
+            throw new RuntimeException(e);
+        }
     }
 
     /**
