@@ -72,8 +72,7 @@ public class FileIO {
      * Loads a key (public or private) from a file.
      * 
      * @param filepath  the path to the file containing the key
-     * @param publicKey true if the key is a public key, false if it is a private
-     *                  key
+     * @param publicKey true if the key is a public key, false if it is a private key
      * @return the key
      */
     private static Key loadKey(final String filepath, final boolean publicKey) {
@@ -117,7 +116,12 @@ public class FileIO {
         }
     }
 
-    private static String removePemHeaders(String pemContent) {
+    /**
+     * Removes PEM headers and footers from the given PEM content.
+     * @param pemContent the PEM content as a String
+     * @return the PEM content without headers and footers
+     */
+    private static String removePemHeaders(final String pemContent) {
         return pemContent
                 .replace("-----BEGIN PRIVATE KEY-----", "")
                 .replace("-----END PRIVATE KEY-----", "")
