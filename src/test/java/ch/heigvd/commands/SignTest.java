@@ -1,5 +1,6 @@
 package ch.heigvd.commands;
 
+import ch.heigvd.SignatureConstants;
 import ch.heigvd.SignatureOperations;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +18,7 @@ public class SignTest {
     @Before
     public void setUp() throws Exception {
         final KeyPair keyPair = KeyPairGenerator
-                .getInstance("ed25519")
+                .getInstance(SignatureConstants.SIGNATURE_ALGORITHM)
                 .generateKeyPair();
         privateKey = keyPair.getPrivate();
         publicKey = keyPair.getPublic();
@@ -28,7 +29,7 @@ public class SignTest {
     public void testSignatureIsValid() throws Exception {
         final byte[] signature = SignatureOperations.sign(message, privateKey);
 
-        final Signature verifier = Signature.getInstance("ed25519");
+        final Signature verifier = Signature.getInstance(SignatureConstants.SIGNATURE_ALGORITHM);
         verifier.initVerify(publicKey);
         verifier.update(message);
         assertTrue(verifier.verify(signature));
