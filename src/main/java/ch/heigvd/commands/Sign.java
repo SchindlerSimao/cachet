@@ -5,6 +5,7 @@ import ch.heigvd.SignatureOperations;
 import picocli.CommandLine;
 
 import java.security.PrivateKey;
+import java.util.Base64;
 
 @CommandLine.Command(name = "sign", description = "Signe un fichier")
 class Sign implements Runnable {
@@ -26,7 +27,11 @@ class Sign implements Runnable {
         System.out.printf("Signature de %s vers %s%n", inputFilePath, outputSignaturePath);
 
         final byte[] signature = SignatureOperations.sign(dataToSign, privateKey);
-        FileIO.writeToFile(signature, outputSignaturePath);
+
+        final byte[] encodedSignature = Base64.getEncoder().encode(signature);
+
+        System.out.println("Signature :" + new String(encodedSignature));
+        FileIO.writeToFile(encodedSignature, outputSignaturePath);
 
         System.out.println("Terminé.");
     }

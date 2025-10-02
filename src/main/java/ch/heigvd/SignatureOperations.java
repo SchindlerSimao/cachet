@@ -14,7 +14,7 @@ public class SignatureOperations {
      */
     public static byte[] sign(final byte[] data, final PrivateKey privateKey) {
         try{
-            final Signature ecdsaSign = Signature.getInstance("SHA256withECDSA");
+            final Signature ecdsaSign = Signature.getInstance("ed25519");
             ecdsaSign.initSign(privateKey);
             ecdsaSign.update(data);
 

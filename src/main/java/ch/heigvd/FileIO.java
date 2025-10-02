@@ -4,6 +4,7 @@ import java.io.*;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
+import java.util.Base64;
 
 /**
  * Utility class for file input/output operations and key loading.
@@ -76,10 +77,12 @@ public class FileIO {
      * @return the key
      */
     private static Key loadKey(final String filepath, final boolean publicKey) {
-        final byte[] keyBytes = fileToBytes(filepath);
-        final PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(keyBytes);
+        final String key = removePemHeaders(fileToString(filepath));
+        final byte[] decodedKey = Base64.getDecoder().decode(key);
+
+        final PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(decodedKey);
         try {
-            final KeyFactory kf = KeyFactory.getInstance("EC");
+            final KeyFactory kf = KeyFactory.getInstance("ed25519");
             if (publicKey)
                 return kf.generatePublic(spec);
             return kf.generatePrivate(spec);
@@ -112,5 +115,12 @@ public class FileIO {
             System.err.println("Error writing to file: " + filePath);
             throw new RuntimeException(e);
         }
+    }
+
+    private static String removePemHeaders(String pemContent) {
+        return pemContent
+                .replace("-----BEGIN PRIVATE KEY-----", "")
+                .replace("-----END PRIVATE KEY-----", "")
+                .replaceAll("\\s", "");
     }
 }
