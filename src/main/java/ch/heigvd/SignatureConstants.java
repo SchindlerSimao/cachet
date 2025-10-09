@@ -7,5 +7,5 @@ public final class SignatureConstants {
     /**
      * The signature algorithm to be used for signing and verifying data.
      */
-    public static final String SIGNATURE_ALGORITHM = "ed25519";
+    public static final String SIGNATURE_ALGORITHM = "Ed25519";
 }

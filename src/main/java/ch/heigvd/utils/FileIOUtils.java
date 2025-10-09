@@ -1,5 +1,7 @@
 package ch.heigvd.utils;
 
+import ch.heigvd.SignatureConstants;
+
 import java.io.*;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
@@ -80,7 +82,7 @@ public class FileIOUtils {
         final String key = removePemHeaders(fileToString(filepath));
         final byte[] decodedKey = Base64.getDecoder().decode(key);
         try {
-            final KeyFactory kf = KeyFactory.getInstance("ed25519");
+            final KeyFactory kf = KeyFactory.getInstance(SignatureConstants.SIGNATURE_ALGORITHM);
             if (publicKey) {
                 final X509EncodedKeySpec spec = new X509EncodedKeySpec(decodedKey);
                 return kf.generatePublic(spec);
@@ -92,6 +94,29 @@ public class FileIOUtils {
             System.err.println("Error loading key: " + filepath + " - " + e.getMessage());
             throw new RuntimeException(e);
         }
+    }
+
+    public static void writePublicKey(final PublicKey publicKey) {
+        writePublicKey("./public_key.pem", publicKey);
+    }
+
+    public static void writePrivateKey(final PrivateKey privateKey) {
+        writePrivateKey("./private_key.pem", privateKey);
+    }
+
+    public static void writePrivateKey(final String filePath, final PrivateKey privateKey) {
+        writeKey(filePath, privateKey, false);
+    }
+
+    public static void writePublicKey(final String filePath, final PublicKey publicKey) {
+        writeKey(filePath, publicKey, true);
+    }
+
+    private static void writeKey(final String filePath, final Key key, final boolean publicKey){
+        final String base64Key = Base64.getEncoder().encodeToString(key.getEncoded());
+        final String pemKey = addPemHeaders(base64Key, publicKey);
+
+        writeToFile(pemKey, filePath);
     }
 
     /**
@@ -131,5 +156,30 @@ public class FileIOUtils {
                 .replace("-----BEGIN PUBLIC KEY-----", "")
                 .replace("-----END PUBLIC KEY-----", "")
                 .replaceAll("\\s", "");
+    }
+
+    private static String addPemHeaders(final String base64Key, final boolean publicKey) {
+        StringBuilder pem = new StringBuilder();
+        if (publicKey) {
+            pem.append("-----BEGIN PUBLIC KEY-----\n");
+        } else {
+            pem.append("-----BEGIN PRIVATE KEY-----\n");
+        }
+
+        // Split the base64 string into lines of 64 characters
+        int index = 0;
+        while (index < base64Key.length()) {
+            pem.append(base64Key, index, Math.min(index + 64, base64Key.length()));
+            pem.append("\n");
+            index += 64;
+        }
+
+        if (publicKey) {
+            pem.append("-----END PUBLIC KEY-----\n");
+        } else {
+            pem.append("-----END PRIVATE KEY-----\n");
+        }
+
+        return pem.toString();
     }
 }

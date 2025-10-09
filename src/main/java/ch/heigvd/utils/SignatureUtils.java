@@ -16,7 +16,7 @@ public class SignatureUtils {
      */
     public static byte[] sign(final byte[] data, final PrivateKey privateKey) {
         try{
-            final Signature ecdsaSign = Signature.getInstance("ed25519");
+            final Signature ecdsaSign = Signature.getInstance(SignatureConstants.SIGNATURE_ALGORITHM);
             ecdsaSign.initSign(privateKey);
             ecdsaSign.update(data);
 
@@ -49,6 +49,16 @@ public class SignatureUtils {
             return verifier.verify(signature);
         } catch (NoSuchAlgorithmException | InvalidKeyException | SignatureException e) {
             throw new RuntimeException(e); // TODO: qqch de plus propre
+        }
+    }
+
+    public static PrivateKey generatePrivateKey() {
+        try {
+            final KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(SignatureConstants.SIGNATURE_ALGORITHM);
+
+            return keyPairGenerator.generateKeyPair().getPrivate();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
     }
 }

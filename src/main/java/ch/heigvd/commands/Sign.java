@@ -20,7 +20,7 @@ class Sign implements Runnable {
     private String privateKeyPath;
 
     @Override
-    public void run() { // TODO: ? add an option to generate a key pair if none is provided ?
+    public void run() {
         final byte[] dataToSign = FileIOUtils.fileToBytes(inputFilePath);
         final PrivateKey privateKey = FileIOUtils.loadPrivateKey(privateKeyPath);
 

@@ -22,7 +22,8 @@ class Verify implements Runnable {
     public void run() {
         final byte[] dataToVerify = FileIOUtils.fileToBytes(inputFile);
         final PublicKey publicKey = FileIOUtils.loadPublicKey(this.publicKey);
-        final byte[] signature = FileIOUtils.fileToBytes(signatureFile);
+        final byte[] signatureEncoded = FileIOUtils.fileToBytes(signatureFile);
+        final byte[] signature = java.util.Base64.getDecoder().decode(signatureEncoded);
 
         System.out.printf("Vérification de %s avec signature %s et clé %s%n",
                 inputFile, signatureFile, publicKey);
