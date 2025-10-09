@@ -11,7 +11,8 @@ Developed by Colin Stefani and Simão Romano Schindler, as part of the teaching 
 - Signature verification
 
 One command-line interface (CLI) for all operations.
-___
+
+---
 
 ## Installation
 
@@ -23,7 +24,8 @@ ___
 ./mvnw clean package
 ```
 The jar will be generated in `target/cachet-1.0-SNAPSHOT.jar`.
-___
+
+---
 
 ## Usage
 
@@ -57,7 +59,8 @@ java -jar target/cachet-1.0-SNAPSHOT.jar sign text.txt output.sig private.pem
 # Verify the signature
 java -jar target/cachet-1.0-SNAPSHOT.jar verify text.txt output.sig public.pem
 ```
-___
+
+---
 
 ## Project Structure
 
@@ -68,13 +71,10 @@ cachet/
 │   ├── main/java/ch/heigvd/utils/      # Utilities (SignatureUtils, FileIOUtils)
 │   └── main/java/ch/heigvd/SignatureConstants.java
 ├── test/java/ch/heigvd/commands/       # Unit tests
-├── private.pem                         # Private key (example)
-├── public.pem                          # Public key (example)
-├── output.sig                          # Generated signature (example)
-├── text.txt                            # File to sign (example)
 └── README.md
 ```
-___
+
+---
 
 ## Implementation details
 
@@ -87,7 +87,8 @@ ___
 
 ### Signature Format
 - Binary signature encoded in Base64 for storage and transport
-___
+
+---
 
 ## Tests
 - Run unit tests with:
