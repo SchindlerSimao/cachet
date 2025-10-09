@@ -1,0 +1,3 @@
+Un fichier à signer.
+
+Je le commit pour l'utiliser dans les exemples d'utilisation du README.md.
