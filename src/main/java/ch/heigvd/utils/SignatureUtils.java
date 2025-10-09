@@ -52,11 +52,11 @@ public class SignatureUtils {
         }
     }
 
-    public static PrivateKey generatePrivateKey() {
+    public static KeyPair generateKeyPair() {
         try {
             final KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(SignatureConstants.SIGNATURE_ALGORITHM);
 
-            return keyPairGenerator.generateKeyPair().getPrivate();
+            return keyPairGenerator.generateKeyPair();
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
