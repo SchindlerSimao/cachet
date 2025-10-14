@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Sign" type="JarApplication">
+    <option name="JAR_PATH" value="$PROJECT_DIR$/target/cachet-1.0-SNAPSHOT.jar" />
+    <option name="PROGRAM_PARAMETERS" value="sign text.txt output.sig private_key.pem" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <method v="2" />
+  </configuration>
+</component>

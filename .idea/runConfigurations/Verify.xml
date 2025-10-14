@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Verify" type="JarApplication">
+    <option name="JAR_PATH" value="$PROJECT_DIR$/target/cachet-1.0-SNAPSHOT.jar" />
+    <option name="PROGRAM_PARAMETERS" value="verify text.txt output.sig public_key.pem" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <method v="2" />
+  </configuration>
+</component>

@@ -62,7 +62,7 @@ class Sign implements Runnable {
             FileIOUtils.writeToFile(encodedSignature, outputSignaturePath);
             System.out.println("Signature enregistrée dans : " + outputSignaturePath);
 
-            System.out.println("✓ Signature terminée avec succès");
+            System.out.println("Signature terminée avec succès");
         } catch (CachetException e) {
             System.err.println("Erreur : " + e.getMessage());
             System.exit(1);
