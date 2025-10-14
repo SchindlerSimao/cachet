@@ -1,6 +1,6 @@
 package ch.heigvd.utils;
 
-import ch.heigvd.SignatureConstants;
+import ch.heigvd.Constants;
 import ch.heigvd.exceptions.FileOperationException;
 import ch.heigvd.exceptions.KeyOperationException;
 
@@ -119,7 +119,7 @@ public class FileIOUtils {
         }
 
         try {
-            final KeyFactory kf = KeyFactory.getInstance(SignatureConstants.SIGNATURE_ALGORITHM);
+            final KeyFactory kf = KeyFactory.getInstance(Constants.SIGNATURE_ALGORITHM);
             if (publicKey) {
                 final X509EncodedKeySpec spec = new X509EncodedKeySpec(decodedKey);
                 return kf.generatePublic(spec);
@@ -133,7 +133,7 @@ public class FileIOUtils {
                 (publicKey ? "publique" : "privée") + " valide au format " +
                 (publicKey ? "X.509" : "PKCS#8") + " : " + filepath, e);
         } catch (final NoSuchAlgorithmException e) {
-            throw new KeyOperationException("L'algorithme " + SignatureConstants.SIGNATURE_ALGORITHM + " n'est pas supporté", e);
+            throw new KeyOperationException("L'algorithme " + Constants.SIGNATURE_ALGORITHM + " n'est pas supporté", e);
         }
     }
 
