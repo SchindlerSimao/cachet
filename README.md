@@ -31,20 +31,20 @@ The jar will be generated in `target/cachet-1.0-SNAPSHOT.jar`.
 
 ### Key Generation
 ```sh
-java -jar target/cachet-1.0-SNAPSHOT.jar keygen private.pem public.pem
+java -jar target/cachet-1.0-SNAPSHOT.jar keygen --private private.pem --public public.pem
 ```
 - `private.pem`: Ed25519 private key (PEM, PKCS#8)
 - `public.pem`: Ed25519 public key (PEM, SubjectPublicKeyInfo)
 
 ### File Signing
 ```sh
-java -jar target/cachet-1.0-SNAPSHOT.jar sign <file_to_sign> <signature_out.sig> <private.pem>
+java -jar target/cachet-1.0-SNAPSHOT.jar sign text.txt output.sig private.pem
 ```
 - The signature is Base64-encoded and written to `<signature_out.sig>`
 
 ### Signature Verification
 ```sh
-java -jar target/cachet-1.0-SNAPSHOT.jar verify <file_to_verify> <signature.sig> <public.pem>
+java -jar target/cachet-1.0-SNAPSHOT.jar verify text.txt output.sig public.pem
 ```
 - The signature is read, decoded from Base64, and verified
 
