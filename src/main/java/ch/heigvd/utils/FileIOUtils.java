@@ -3,6 +3,7 @@ package ch.heigvd.utils;
 import ch.heigvd.Constants;
 import ch.heigvd.exceptions.FileOperationException;
 import ch.heigvd.exceptions.KeyOperationException;
+import ch.heigvd.exceptions.MissingParameterException;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -214,6 +215,17 @@ public final class FileIOUtils {
             outputStream.write(content);
         } catch (IOException e) {
             throw new FileOperationException("Erreur lors de l'écriture dans le fichier : " + filePath, e);
+        }
+    }
+
+    /**
+     * Validates that a parameter is not null or empty. If it is, prints the error message and exits.
+     * @param parameter the parameter to validate
+     * @param errorMessage the error message to print if the parameter is invalid
+     */
+    public static void validateParameters(final String parameter, final String errorMessage) {
+        if (parameter == null || parameter.trim().isEmpty()) {
+            throw new MissingParameterException(errorMessage);
         }
     }
 

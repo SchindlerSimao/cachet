@@ -23,21 +23,9 @@ class Verify implements Runnable {
     public void run() {
         try {
             // Validate input parameters
-            if (inputFile == null || inputFile.trim().isEmpty()) {
-                System.err.println("Erreur : Le chemin du fichier d'entrée est requis");
-                System.exit(1);
-                return;
-            }
-            if (signatureFile == null || signatureFile.trim().isEmpty()) {
-                System.err.println("Erreur : Le chemin du fichier de signature est requis");
-                System.exit(1);
-                return;
-            }
-            if (publicKeyPath == null || publicKeyPath.trim().isEmpty()) {
-                System.err.println("Erreur : Le chemin de la clé publique est requis");
-                System.exit(1);
-                return;
-            }
+            FileIOUtils.validateParameters(inputFile, "Erreur : Le chemin du fichier d'entrée est requis");
+            FileIOUtils.validateParameters(signatureFile, "Erreur : Le chemin du fichier de signature est requis");
+            FileIOUtils.validateParameters(publicKeyPath, "Erreur : Le chemin de la clé publique est requis");
 
             System.out.printf("Vérification de %s avec signature %s et clé %s%n",
                     inputFile, signatureFile, publicKeyPath);

@@ -24,21 +24,9 @@ class Sign implements Runnable {
     public void run() {
         try {
             // Validate input parameters
-            if (inputFilePath == null || inputFilePath.trim().isEmpty()) {
-                System.err.println("Erreur : Le chemin du fichier d'entrée est requis");
-                System.exit(1);
-                return;
-            }
-            if (outputSignaturePath == null || outputSignaturePath.trim().isEmpty()) {
-                System.err.println("Erreur : Le chemin du fichier de sortie est requis");
-                System.exit(1);
-                return;
-            }
-            if (privateKeyPath == null || privateKeyPath.trim().isEmpty()) {
-                System.err.println("Erreur : Le chemin de la clé privée est requis");
-                System.exit(1);
-                return;
-            }
+            FileIOUtils.validateParameters(inputFilePath, "Erreur : Le chemin du fichier d'entrée est requis");
+            FileIOUtils.validateParameters(outputSignaturePath, "Erreur : Le chemin du fichier de sortie est requis");
+            FileIOUtils.validateParameters(privateKeyPath, "Erreur : Le chemin de la clé privée est requis");
 
             System.out.printf("Signature de %s vers %s%n", inputFilePath, outputSignaturePath);
 
