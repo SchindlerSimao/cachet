@@ -9,7 +9,11 @@ import java.security.*;
 /**
  * This class provides methods for signing data and verifying signatures.
  */
-public class SignatureUtils {
+public final class SignatureUtils {
+    /**
+     * Private constructor to prevent instantiation.
+     */
+    private SignatureUtils() {}
     /**
      * Signs the given data with the provided private key.
      *

@@ -17,7 +17,11 @@ import java.util.Base64;
 /**
  * Utility class for file input/output operations and key loading.
  */
-public class FileIOUtils {
+public final class FileIOUtils {
+    /**
+     * Private constructor to prevent instantiation.
+     */
+    private FileIOUtils() {}
     /**
      * Reads the content of a file and returns it as a String.
      * 
