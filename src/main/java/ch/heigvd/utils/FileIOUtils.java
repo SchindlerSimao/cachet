@@ -31,7 +31,7 @@ public class FileIOUtils {
         validateFileReadable(filePath);
 
         try (final InputStream inputStream = new FileInputStream(filePath)) {
-            return new String(inputStream.readAllBytes());
+            return new String(inputStream.readAllBytes(), Constants.CHARSET);
         } catch (FileNotFoundException e) {
             throw new FileOperationException("Fichier introuvable : " + filePath, e);
         } catch (IOException e) {
@@ -188,7 +188,7 @@ public class FileIOUtils {
         if (content == null) {
             throw new FileOperationException("Le contenu à écrire ne peut pas être nul");
         }
-        writeToFile(content.getBytes(), filePath);
+        writeToFile(content.getBytes(Constants.CHARSET), filePath);
     }
 
     /**
