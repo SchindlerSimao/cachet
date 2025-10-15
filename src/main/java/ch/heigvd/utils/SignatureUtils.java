@@ -86,20 +86,4 @@ public final class SignatureUtils {
                     e.getMessage(), e);
         }
     }
-
-    /**
-     * Generates a new key pair for signing and verification.
-     *
-     * @return a new KeyPair
-     * @throws KeyOperationException if key generation fails
-     */
-    public static KeyPair generateKeyPair() {
-        try {
-            final KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(Constants.SIGNATURE_ALGORITHM);
-            return keyPairGenerator.generateKeyPair();
-        } catch (NoSuchAlgorithmException e) {
-            throw new KeyOperationException("L'algorithme " + Constants.SIGNATURE_ALGORITHM +
-                    " n'est pas supporté pour la génération de clés", e);
-        }
-    }
 }

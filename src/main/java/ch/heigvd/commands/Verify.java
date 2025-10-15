@@ -2,6 +2,7 @@ package ch.heigvd.commands;
 
 import ch.heigvd.exceptions.CachetException;
 import ch.heigvd.utils.FileIOUtils;
+import ch.heigvd.utils.KeyUtils;
 import ch.heigvd.utils.SignatureUtils;
 import picocli.CommandLine;
 
@@ -35,7 +36,7 @@ class Verify implements Runnable {
             System.out.printf("Fichier lu (%d octets)%n", dataToVerify.length);
 
             System.out.println("Chargement de la clé publique...");
-            final PublicKey publicKey = FileIOUtils.loadPublicKey(publicKeyPath);
+            final PublicKey publicKey = KeyUtils.loadPublicKey(publicKeyPath);
             System.out.println("Clé publique chargée");
 
             System.out.println("Lecture de la signature...");

@@ -1,8 +1,7 @@
 package ch.heigvd.commands;
 
 import ch.heigvd.exceptions.CachetException;
-import ch.heigvd.utils.FileIOUtils;
-import ch.heigvd.utils.SignatureUtils;
+import ch.heigvd.utils.KeyUtils;
 import picocli.CommandLine;
 
 @CommandLine.Command(name = "keygen", description = "Génère une identité (clé privée) aléatoire pour la signature")
@@ -23,13 +22,13 @@ class Keygen implements Runnable {
 
             System.out.println("Génération d'une nouvelle paire de clés...");
 
-            java.security.KeyPair keyPair = SignatureUtils.generateKeyPair();
+            java.security.KeyPair keyPair = KeyUtils.generateKeyPair();
 
-            FileIOUtils.writePrivateKey(outputFile, keyPair.getPrivate());
+            KeyUtils.writePrivateKey(outputFile, keyPair.getPrivate());
             System.out.println("Clé privée enregistrée dans : " + outputFile);
 
             if (publicKeyFile != null && !publicKeyFile.trim().isEmpty()) {
-                FileIOUtils.writePublicKey(publicKeyFile, keyPair.getPublic());
+                KeyUtils.writePublicKey(publicKeyFile, keyPair.getPublic());
                 System.out.println("Clé publique enregistrée dans : " + publicKeyFile);
             } else {
                 System.out.println("Note : Aucune clé publique n'a été enregistrée (utilisez --public pour spécifier un fichier)");

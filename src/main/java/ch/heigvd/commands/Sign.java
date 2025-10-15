@@ -3,6 +3,7 @@ package ch.heigvd.commands;
 import ch.heigvd.exceptions.CachetException;
 import ch.heigvd.utils.FileIOUtils;
 import ch.heigvd.utils.SignatureUtils;
+import ch.heigvd.utils.KeyUtils;
 import picocli.CommandLine;
 
 import java.security.PrivateKey;
@@ -35,7 +36,7 @@ class Sign implements Runnable {
             System.out.printf("Fichier lu (%d octets)%n", dataToSign.length);
 
             System.out.println("Chargement de la clé privée...");
-            final PrivateKey privateKey = FileIOUtils.loadPrivateKey(privateKeyPath);
+            final PrivateKey privateKey = KeyUtils.loadPrivateKey(privateKeyPath);
             System.out.println("Clé privée chargée");
 
             System.out.println("Signature en cours...");
