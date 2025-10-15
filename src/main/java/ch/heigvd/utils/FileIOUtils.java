@@ -17,9 +17,10 @@ public final class FileIOUtils {
      * Private constructor to prevent instantiation.
      */
     private FileIOUtils() {}
+
     /**
      * Reads the content of a file and returns it as a String.
-     * 
+     *
      * @param filePath the path to the file
      * @return the content of the file as a String
      * @throws FileOperationException if the file cannot be read
@@ -40,7 +41,7 @@ public final class FileIOUtils {
 
     /**
      * Reads the content of a file and returns it as a byte array.
-     * 
+     *
      * @param filePath the path to the file
      * @return the content of the file as a byte array
      * @throws FileOperationException if the file cannot be read
@@ -65,7 +66,7 @@ public final class FileIOUtils {
 
     /**
      * Writes the given content to a file at the specified path.
-     * 
+     *
      * @param content  the content to write to the file
      * @param filePath the path to the file
      * @throws FileOperationException if the file cannot be written
@@ -79,7 +80,7 @@ public final class FileIOUtils {
 
     /**
      * Writes the given content to a file at the specified path.
-     * 
+     *
      * @param content  the content to write to the file
      * @param filePath the path to the file
      * @throws FileOperationException if the file cannot be written
@@ -101,7 +102,8 @@ public final class FileIOUtils {
 
     /**
      * Validates that a parameter is not null or empty. If it is, prints the error message and exits.
-     * @param parameter the parameter to validate
+     *
+     * @param parameter    the parameter to validate
      * @param errorMessage the error message to print if the parameter is invalid
      */
     public static void validateParameters(final String parameter, final String errorMessage) {
@@ -113,6 +115,7 @@ public final class FileIOUtils {
 
     /**
      * Validates that a file path is not null or empty.
+     *
      * @param filePath the file path to validate
      * @throws FileOperationException if the file path is invalid
      */
@@ -124,6 +127,7 @@ public final class FileIOUtils {
 
     /**
      * Validates that a file exists.
+     *
      * @param filePath the file path to validate
      * @throws FileOperationException if the file does not exist
      */
@@ -139,6 +143,7 @@ public final class FileIOUtils {
 
     /**
      * Validates that a file is readable.
+     *
      * @param filePath the file path to validate
      * @throws FileOperationException if the file is not readable
      */
@@ -151,6 +156,7 @@ public final class FileIOUtils {
 
     /**
      * Validates that the directory for a file path is writable.
+     *
      * @param filePath the file path to validate
      * @throws FileOperationException if the directory is not writable
      */

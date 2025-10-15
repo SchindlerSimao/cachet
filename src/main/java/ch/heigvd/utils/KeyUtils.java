@@ -58,7 +58,8 @@ public final class KeyUtils {
 
     /**
      * Writes a private key to a file in PEM format.
-     * @param filePath the path to the file where the private key will be written
+     *
+     * @param filePath   the path to the file where the private key will be written
      * @param privateKey the private key to write
      */
     public static void writePrivateKey(final String filePath, final PrivateKey privateKey) {
@@ -70,7 +71,8 @@ public final class KeyUtils {
 
     /**
      * Writes a public key to a file in PEM format.
-     * @param filePath the path to the file where the public key will be written
+     *
+     * @param filePath  the path to the file where the public key will be written
      * @param publicKey the public key to write
      */
     public static void writePublicKey(final String filePath, final PublicKey publicKey) {
@@ -127,11 +129,12 @@ public final class KeyUtils {
 
     /**
      * Writes a key (public or private) to a file in PEM format.
-     * @param filePath the path to the file where the key will be written
-     * @param key the key to write
+     *
+     * @param filePath  the path to the file where the key will be written
+     * @param key       the key to write
      * @param publicKey true if the key is a public key, false if it is a private key
      */
-    private static void writeKey(final String filePath, final Key key, final boolean publicKey){
+    private static void writeKey(final String filePath, final Key key, final boolean publicKey) {
         FileIOUtils.validateFilePath(filePath);
         FileIOUtils.validateWritableDirectory(filePath);
         final String base64Key = Base64.getEncoder().encodeToString(key.getEncoded());
@@ -141,6 +144,7 @@ public final class KeyUtils {
 
     /**
      * Removes PEM headers and footers from the given PEM content.
+     *
      * @param pemContent the PEM content as a String
      * @return the PEM content without headers and footers
      */
@@ -155,6 +159,7 @@ public final class KeyUtils {
 
     /**
      * Adds PEM headers and footers to a base64-encoded key string.
+     *
      * @param base64Key the base64-encoded key string
      * @param publicKey true if the key is a public key, false if it is a private key
      * @return the PEM-formatted key as a String
@@ -180,4 +185,3 @@ public final class KeyUtils {
         return pem.toString();
     }
 }
-

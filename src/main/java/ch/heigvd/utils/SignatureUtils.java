@@ -14,6 +14,7 @@ public final class SignatureUtils {
      * Private constructor to prevent instantiation.
      */
     private SignatureUtils() {}
+
     /**
      * Signs the given data with the provided private key.
      *
