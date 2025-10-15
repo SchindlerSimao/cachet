@@ -64,15 +64,7 @@ java -jar target/cachet-1.0-SNAPSHOT.jar verify text.txt output.sig public.pem
 
 ## Project Structure
 
-```
-cachet/
-├── src/
-│   ├── main/java/ch/heigvd/commands/   # CLI commands (Sign, Verify, Keygen)
-│   ├── main/java/ch/heigvd/utils/      # Utilities (SignatureUtils, FileIOUtils)
-│   └── main/java/ch/heigvd/SignatureConstants.java
-├── test/java/ch/heigvd/commands/       # Unit tests
-└── README.md
-```
+![Project structure](presentation/project_structure.png)
 
 ---
 
