@@ -1,6 +1,5 @@
 package ch.heigvd.commands;
 
-import ch.heigvd.exceptions.CachetException;
 import ch.heigvd.utils.FileIOUtils;
 import ch.heigvd.utils.SignatureUtils;
 import ch.heigvd.utils.KeyUtils;
@@ -23,42 +22,31 @@ class Sign implements Runnable {
 
     @Override
     public void run() {
-        try {
-            // Validate input parameters
-            FileIOUtils.validateParameters(inputFilePath, "Erreur : Le chemin du fichier d'entrée est requis");
-            FileIOUtils.validateParameters(outputSignaturePath, "Erreur : Le chemin du fichier de sortie est requis");
-            FileIOUtils.validateParameters(privateKeyPath, "Erreur : Le chemin de la clé privée est requis");
+        FileIOUtils.validateParameters(inputFilePath, "Erreur : Le chemin du fichier d'entrée est requis");
+        FileIOUtils.validateParameters(outputSignaturePath, "Erreur : Le chemin du fichier de sortie est requis");
+        FileIOUtils.validateParameters(privateKeyPath, "Erreur : Le chemin de la clé privée est requis");
 
-            System.out.printf("Signature de %s vers %s%n", inputFilePath, outputSignaturePath);
+        System.out.printf("Signature de %s vers %s%n", inputFilePath, outputSignaturePath);
 
-            System.out.println("Lecture du fichier...");
-            final byte[] dataToSign = FileIOUtils.fileToBytes(inputFilePath);
-            System.out.printf("Fichier lu (%d octets)%n", dataToSign.length);
+        System.out.println("Lecture du fichier...");
+        final byte[] dataToSign = FileIOUtils.fileToBytes(inputFilePath);
+        System.out.printf("Fichier lu (%d octets)%n", dataToSign.length);
 
-            System.out.println("Chargement de la clé privée...");
-            final PrivateKey privateKey = KeyUtils.loadPrivateKey(privateKeyPath);
-            System.out.println("Clé privée chargée");
+        System.out.println("Chargement de la clé privée...");
+        final PrivateKey privateKey = KeyUtils.loadPrivateKey(privateKeyPath);
+        System.out.println("Clé privée chargée");
 
-            System.out.println("Signature en cours...");
-            final byte[] signature = SignatureUtils.sign(dataToSign, privateKey);
-            System.out.println("Signature générée");
+        System.out.println("Signature en cours...");
+        final byte[] signature = SignatureUtils.sign(dataToSign, privateKey);
+        System.out.println("Signature générée");
 
-            final byte[] encodedSignature = Base64.getEncoder().encode(signature);
+        final byte[] encodedSignature = Base64.getEncoder().encode(signature);
 
-            System.out.println("Signature (Base64) : " + new String(encodedSignature));
+        System.out.println("Signature (Base64) : " + new String(encodedSignature));
 
-            System.out.println("Écriture de la signature...");
-            FileIOUtils.writeToFile(encodedSignature, outputSignaturePath);
-            System.out.println("Signature enregistrée dans : " + outputSignaturePath);
-
-            System.out.println("Signature terminée avec succès");
-        } catch (CachetException e) {
-            System.err.println("Erreur : " + e.getMessage());
-            System.exit(1);
-        } catch (Exception e) {
-            System.err.println("Erreur inattendue : " + e.getMessage());
-            e.printStackTrace();
-            System.exit(1);
-        }
+        System.out.println("Écriture de la signature...");
+        FileIOUtils.writeToFile(encodedSignature, outputSignaturePath);
+        System.out.println("Signature écrite dans : " + outputSignaturePath);
+        System.out.println("Opération de signature terminée avec succès");
     }
 }
