@@ -19,6 +19,11 @@ One command-line interface (CLI) for all operations.
 ### Prerequisites
 - Java 21+
 
+### Clone the repository
+```sh
+git clone git@github.com:SchindlerSimao/cachet.git
+```
+
 ### Build
 ```sh
 ./mvnw clean package
