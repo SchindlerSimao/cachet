@@ -1,5 +1,7 @@
 package ch.heigvd.commands;
 
+import ch.heigvd.Constants;
+import ch.heigvd.exceptions.CachetException;
 import ch.heigvd.utils.KeyUtils;
 import picocli.CommandLine;
 
@@ -20,18 +22,27 @@ class Keygen implements Runnable {
 
         System.out.println("Génération d'une nouvelle paire de clés...");
 
-        java.security.KeyPair keyPair = KeyUtils.generateKeyPair();
+        try {
+            java.security.KeyPair keyPair = KeyUtils.generateKeyPair();
 
-        KeyUtils.writePrivateKey(outputFile, keyPair.getPrivate());
-        System.out.println("Clé privée enregistrée dans : " + outputFile);
+            KeyUtils.writePrivateKey(outputFile, keyPair.getPrivate());
+            System.out.println("Clé privée enregistrée dans : " + outputFile);
 
-        if (publicKeyFile != null && !publicKeyFile.trim().isEmpty()) {
-            KeyUtils.writePublicKey(publicKeyFile, keyPair.getPublic());
-            System.out.println("Clé publique enregistrée dans : " + publicKeyFile);
-        } else {
-            System.out.println("Note : Aucune clé publique n'a été enregistrée (utilisez --public pour spécifier un fichier)");
+            if (publicKeyFile != null && !publicKeyFile.trim().isEmpty()) {
+                KeyUtils.writePublicKey(publicKeyFile, keyPair.getPublic());
+                System.out.println("Clé publique enregistrée dans : " + publicKeyFile);
+            } else {
+                System.out.println("Note : Aucune clé publique n'a été enregistrée (utilisez --public pour spécifier un fichier)");
+            }
+
+            System.out.println("Génération de clés terminée avec succès");
+        } catch (CachetException e) {
+            System.err.println("Erreur : " + e.getMessage());
+            System.exit(Constants.ERROR_EXIT_CODE);
+        } catch (Exception e) {
+            System.err.println("Erreur inattendue : " + e.getMessage());
+            e.printStackTrace();
+            System.exit(Constants.ERROR_EXIT_CODE);
         }
-
-        System.out.println("Génération de clés terminée avec succès");
     }
 }

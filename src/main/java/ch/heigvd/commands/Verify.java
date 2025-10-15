@@ -1,5 +1,7 @@
 package ch.heigvd.commands;
 
+import ch.heigvd.Constants;
+import ch.heigvd.exceptions.CachetException;
 import ch.heigvd.exceptions.SignatureOperationException;
 import ch.heigvd.utils.FileIOUtils;
 import ch.heigvd.utils.KeyUtils;
@@ -22,40 +24,50 @@ class Verify implements Runnable {
 
     @Override
     public void run() {
-        FileIOUtils.validateParameters(inputFile, "Erreur : Le chemin du fichier d'entrée est requis");
-        FileIOUtils.validateParameters(signatureFile, "Erreur : Le chemin du fichier de signature est requis");
-        FileIOUtils.validateParameters(publicKeyPath, "Erreur : Le chemin de la clé publique est requis");
-
-        System.out.printf("Vérification de %s avec signature %s et clé %s%n",
-                inputFile, signatureFile, publicKeyPath);
-
-        System.out.println("Lecture du fichier...");
-        final byte[] dataToVerify = FileIOUtils.fileToBytes(inputFile);
-        System.out.printf("Fichier lu (%d octets)%n", dataToVerify.length);
-
-        System.out.println("Chargement de la clé publique...");
-        final PublicKey publicKey = KeyUtils.loadPublicKey(publicKeyPath);
-        System.out.println("Clé publique chargée");
-
-        System.out.println("Lecture de la signature...");
-        final byte[] signatureEncoded = FileIOUtils.fileToBytes(signatureFile);
-
-        final byte[] signature;
         try {
-            signature = java.util.Base64.getDecoder().decode(signatureEncoded);
-            System.out.printf("Signature lue (%d octets après décodage Base64)%n", signature.length);
-        } catch (IllegalArgumentException e) {
-            throw new SignatureOperationException("La signature n'est pas au format Base64 valide", e);
-        }
+            FileIOUtils.validateParameters(inputFile, "Erreur : Le chemin du fichier d'entrée est requis");
+            FileIOUtils.validateParameters(signatureFile, "Erreur : Le chemin du fichier de signature est requis");
+            FileIOUtils.validateParameters(publicKeyPath, "Erreur : Le chemin de la clé publique est requis");
 
-        System.out.println("Vérification en cours...");
-        final boolean valid = SignatureUtils.verify(dataToVerify, signature, publicKey);
+            System.out.printf("Vérification de %s avec signature %s et clé %s%n",
+                    inputFile, signatureFile, publicKeyPath);
 
-        System.out.println();
-        if (valid) {
-            System.out.println("La signature est valide");
-        } else {
-            System.out.println("La signature est invalide");
+            System.out.println("Lecture du fichier...");
+            final byte[] dataToVerify = FileIOUtils.fileToBytes(inputFile);
+            System.out.printf("Fichier lu (%d octets)%n", dataToVerify.length);
+
+            System.out.println("Chargement de la clé publique...");
+            final PublicKey publicKey = KeyUtils.loadPublicKey(publicKeyPath);
+            System.out.println("Clé publique chargée");
+
+            System.out.println("Lecture de la signature...");
+            final byte[] signatureEncoded = FileIOUtils.fileToBytes(signatureFile);
+
+            final byte[] signature;
+            try {
+                signature = java.util.Base64.getDecoder().decode(signatureEncoded);
+                System.out.printf("Signature lue (%d octets après décodage Base64)%n", signature.length);
+            } catch (IllegalArgumentException e) {
+                throw new SignatureOperationException("La signature n'est pas au format Base64 valide", e);
+            }
+
+            System.out.println("Vérification en cours...");
+            final boolean valid = SignatureUtils.verify(dataToVerify, signature, publicKey);
+
+            System.out.println();
+            if (valid) {
+                System.out.println("La signature est valide");
+            } else {
+                System.out.println("La signature est invalide");
+                System.exit(Constants.INVALID_SIGNATURE_EXIT_CODE);
+            }
+        } catch (CachetException e) {
+            System.err.println("Erreur : " + e.getMessage());
+            System.exit(Constants.ERROR_EXIT_CODE);
+        } catch (Exception e) {
+            System.err.println("Erreur inattendue : " + e.getMessage());
+            e.printStackTrace();
+            System.exit(Constants.ERROR_EXIT_CODE);
         }
     }
 }
