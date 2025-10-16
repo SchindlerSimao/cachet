@@ -69,7 +69,7 @@ java -jar target/cachet-1.0-SNAPSHOT.jar verify text.txt output.sig public.pem
 
 ## Project Structure
 
-![Project structure](presentation/project_structure.png)
+![Project structure](image/project_structure.png)
 
 ---
 
