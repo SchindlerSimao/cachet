@@ -11,7 +11,6 @@ theme:
 Table des matières
 ===
 
-- Choix du projet
 - Fonctionnalités
 - Structure du projet 
 - Composants
@@ -135,23 +134,24 @@ flowchart TB
 Détails d'implémentation
 ===
 
-### Crypto
+### Algorithme
 - Courbe elliptique ED25519
+- Défini dans `Constants.java`
 
-### Encodage
-- Clé privée PKCS#8
-- Clé publique SPKI
+### Format/encodage
+- Clé privée PKCS#8 PEM
+- Clé publique X.509 PEM
 - Signature Base64
 
 ### Librairies
-- java.security pour éviter les dépendances externes
+- `java.security` pour éviter les dépendances externes comme BouncyCastle
 
 <!-- end_slide -->
 
 Suite / idées d'améliorations
 ===
 
-- Signer des répertoires de fichiers
+- Une commande pour compresser puis signer des répertoires de fichiers
 *
 - Capacité de keygen à dériver une clé publique
 *
