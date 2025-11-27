@@ -1,7 +1,7 @@
-package ch.heigvd.commands;
+package ch.heigvd.cachet.commands;
 
-import ch.heigvd.Constants;
-import ch.heigvd.utils.SignatureUtils;
+import ch.heigvd.cachet.Constants;
+import ch.heigvd.cachet.utils.SignatureUtils;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,10 +1,10 @@
-package ch.heigvd.commands;
+package ch.heigvd.cachet.commands;
 
-import ch.heigvd.Constants;
-import ch.heigvd.exceptions.CachetException;
-import ch.heigvd.utils.FileIOUtils;
-import ch.heigvd.utils.SignatureUtils;
-import ch.heigvd.utils.KeyUtils;
+import ch.heigvd.cachet.Constants;
+import ch.heigvd.cachet.exceptions.CachetException;
+import ch.heigvd.cachet.utils.FileIOUtils;
+import ch.heigvd.cachet.utils.SignatureUtils;
+import ch.heigvd.cachet.utils.KeyUtils;
 import picocli.CommandLine;
 
 import java.security.PrivateKey;

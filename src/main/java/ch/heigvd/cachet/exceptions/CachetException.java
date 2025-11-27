@@ -1,4 +1,4 @@
-package ch.heigvd.exceptions;
+package ch.heigvd.cachet.exceptions;
 
 /**
  * Base exception for all Cachet application errors.

@@ -1,6 +1,6 @@
-package ch.heigvd;
+package ch.heigvd.cachet;
 
-import ch.heigvd.commands.Cachet;
+import ch.heigvd.cachet.commands.Cachet;
 import picocli.CommandLine;
 
 public class Main {

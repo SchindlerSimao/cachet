@@ -1,8 +1,8 @@
-package ch.heigvd.utils;
+package ch.heigvd.cachet.utils;
 
-import ch.heigvd.Constants;
-import ch.heigvd.exceptions.SignatureOperationException;
-import ch.heigvd.exceptions.KeyOperationException;
+import ch.heigvd.cachet.Constants;
+import ch.heigvd.cachet.exceptions.SignatureOperationException;
+import ch.heigvd.cachet.exceptions.KeyOperationException;
 
 import java.security.*;
 

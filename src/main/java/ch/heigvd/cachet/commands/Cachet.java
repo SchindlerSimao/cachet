@@ -1,4 +1,4 @@
-package ch.heigvd.commands;
+package ch.heigvd.cachet.commands;
 
 import picocli.CommandLine;
 

@@ -1,4 +1,4 @@
-package ch.heigvd;
+package ch.heigvd.cachet;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;

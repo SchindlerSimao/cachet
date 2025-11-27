@@ -1,4 +1,4 @@
-package ch.heigvd.exceptions;
+package ch.heigvd.cachet.exceptions;
 
 /**
  * Exception thrown when a signature operation fails.

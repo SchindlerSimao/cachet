@@ -1,8 +1,8 @@
-package ch.heigvd.utils;
+package ch.heigvd.cachet.utils;
 
-import ch.heigvd.Constants;
-import ch.heigvd.exceptions.FileOperationException;
-import ch.heigvd.exceptions.MissingParameterException;
+import ch.heigvd.cachet.Constants;
+import ch.heigvd.cachet.exceptions.FileOperationException;
+import ch.heigvd.cachet.exceptions.MissingParameterException;
 
 import java.io.*;
 import java.nio.file.Files;
